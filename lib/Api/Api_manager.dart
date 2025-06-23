@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 import '../models/res_product.dart';
 
 Future<List<Product>> fetchProducts() async {
