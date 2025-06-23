@@ -1,14 +1,16 @@
+import 'package:fc1/cubit/product_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../Api/Api_manager.dart';
-import 'product_state.dart';
+import '../repositories/product_repository.dart';
 
 class ProductCubit extends Cubit<ProductState> {
-  ProductCubit() : super(ProductInitial());
+  final ProductRepository repository;
 
-  Future<void> fetchProductsData() async {
+  ProductCubit(this.repository) : super(ProductInitial());
+
+  Future<void> fetchProducts() async {
     emit(ProductLoading());
     try {
-      final products = await fetchProducts();
+      final products = await repository.getProducts();
       emit(ProductLoaded(products));
     } catch (e) {
       emit(ProductError(e.toString()));
