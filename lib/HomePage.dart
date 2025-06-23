@@ -6,6 +6,7 @@ import 'package:fc1/models/res_product.dart';
 
 import 'cubit/product_cubit.dart';
 import 'cubit/product_state.dart';
+import 'injection.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -14,7 +15,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ProductCubit(ProductRepository())..fetchProducts(),
+      create: (_) => getIt<ProductCubit>()
+        ..fetchProducts(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Home Page'),
